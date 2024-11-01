@@ -69,30 +69,36 @@ stringCaseMEthod3 = (str) => {
  ** "The_Stealth_Warrior" gets converted to "TheStealthWarrior"
  ** "The_Stealth-Warrior" gets converted to "TheStealthWarrior"
  **
- **
+ **  My Method convertDashToCamelCase1()
  */
 
+const convertDashToCamelCase1 = (str) => {
+  let result = "";
+  let shouldUpperCase = false;
 
-const convertDashToCamelCase = (str) => {
-    let result = '';
-    let shouldUpperCase = false;
-
-    for (let i = 0; i < str.length; i++) {
-        if (str[i] === '-' || str[i] === '_') {
-            shouldUpperCase = true; // Indicate that the next character should be uppercase
-        } else if (shouldUpperCase) {
-            result += str[i].toUpperCase();
-            shouldUpperCase = false; // Reset the flag
-        } else {
-            result += str[i];
-        }
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === "-" || str[i] === "_") {
+      shouldUpperCase = true; // Indicate that the next character should be uppercase
+    } else if (shouldUpperCase) {
+      result += str[i].toUpperCase();
+      shouldUpperCase = false; // Reset the flag
+    } else {
+      result += str[i];
     }
+  }
 
-    return result;
+  return result;
 };
 
+const convertDashToCamelCase2 = (str) => {
+  let regExp = /[-_]\w/gi;
+  return str.replace(regExp, (match) => {
+    return match.charAt(1).toUpperCase();
+  });
+};
 
+function convertDashToCamelCase3(str) {
+  return str.replace(/[-_](.)/g, (_, c) => c.toUpperCase());
+}
 
-
-
-
+convertDashToCamelCase2("the-stealth-warrior");
